@@ -43,7 +43,7 @@ public class CityController {
 	
 	@PostMapping
 	@ResponseStatus(CREATED)
-	public City saveCity(@RequestBody @Valid City city ) {
+	public City saveCity(@RequestBody City city ) {
 		
 		return repository.save(city);
 		
