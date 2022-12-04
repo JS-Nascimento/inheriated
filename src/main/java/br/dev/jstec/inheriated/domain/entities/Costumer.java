@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.dev.jstec.inheriated.domain.enums.CostumerType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,6 +48,7 @@ public class Costumer {
 	@OneToMany(mappedBy = "costumer", fetch = FetchType.LAZY) 
 	private List<Address> addresses = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "costumer")
 	private List<SaleOrder> saleOrders = new ArrayList<>();
 	

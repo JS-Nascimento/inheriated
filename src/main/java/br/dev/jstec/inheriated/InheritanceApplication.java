@@ -17,6 +17,7 @@ import br.dev.jstec.inheriated.domain.entities.PaymentWithCard;
 import br.dev.jstec.inheriated.domain.entities.PaymentWithSlip;
 import br.dev.jstec.inheriated.domain.entities.Product;
 import br.dev.jstec.inheriated.domain.entities.SaleOrder;
+import br.dev.jstec.inheriated.domain.entities.SaleOrderItem;
 import br.dev.jstec.inheriated.domain.entities.State;
 import br.dev.jstec.inheriated.domain.enums.CostumerType;
 import br.dev.jstec.inheriated.domain.enums.PaymentStatus;
@@ -26,6 +27,7 @@ import br.dev.jstec.inheriated.domain.repositories.CityRepository;
 import br.dev.jstec.inheriated.domain.repositories.CostumerRepository;
 import br.dev.jstec.inheriated.domain.repositories.PaymentRepository;
 import br.dev.jstec.inheriated.domain.repositories.ProductRepository;
+import br.dev.jstec.inheriated.domain.repositories.SaleOrderItemRepository;
 import br.dev.jstec.inheriated.domain.repositories.SaleOrderRepository;
 import br.dev.jstec.inheriated.domain.repositories.StateRepository;
 import lombok.Data;
@@ -49,6 +51,8 @@ public class InheritanceApplication implements CommandLineRunner{
 	private SaleOrderRepository SooRepo;
 	@Autowired
 	private PaymentRepository pyRepo;
+	@Autowired
+	private SaleOrderItemRepository soiRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(InheritanceApplication.class, args);
@@ -142,6 +146,28 @@ public class InheritanceApplication implements CommandLineRunner{
 		SooRepo.saveAll(Arrays.asList(sl1,sl2));
 		
 		pyRepo.saveAll(Arrays.asList(pay1,pay2));
+		
+		SaleOrderItem soi1 = new SaleOrderItem(sl1, prod1, 10.0, 10, 1.89);
+		SaleOrderItem soi2 = new SaleOrderItem(sl1, prod3, 5.0, 1, 3.89);
+		SaleOrderItem soi3 = new SaleOrderItem(sl2, prod2, 7.0, 8, 1001.89);
+		
+		sl1.getItems().addAll(Arrays.asList(soi1,soi2));
+		sl2.getItems().addAll(Arrays.asList(soi3));
+		
+		prod1.getItems().addAll(Arrays.asList(soi1));
+		prod2.getItems().addAll(Arrays.asList(soi3));
+		prod3.getItems().addAll(Arrays.asList(soi2));
+		
+		soiRepo.saveAll(Arrays.asList(soi1,soi2,soi3));
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

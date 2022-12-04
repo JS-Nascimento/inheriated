@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.dev.jstec.inheriated.domain.entities.SaleOrder;
-import br.dev.jstec.inheriated.domain.repositories.SaleOrderRepository;
-import br.dev.jstec.inheriated.services.SaleOrderService;
+import br.dev.jstec.inheriated.domain.entities.SaleOrderItem;
+import br.dev.jstec.inheriated.domain.repositories.SaleOrderItemRepository;
+import br.dev.jstec.inheriated.services.SaleOrderItemService;
 
-@RequestMapping(path = "/api/salesOrder")
+@RequestMapping(path = "/api/salesOrderItem")
 @RestController
-public class SaleOrderController {
+public class SaleOrderItemController {
 
 	@Autowired
-	private SaleOrderRepository repository;
+	private SaleOrderItemRepository repository;
 	
 	@Autowired
-	private SaleOrderService service;
+	private SaleOrderItemService service;
 	
 	@GetMapping
 	@ResponseStatus(OK)
-	public List<SaleOrder> getAllSaleOrder(){
+	public List<SaleOrderItem> getAllSaleOrderItem(){
 		return repository.findAll();
 	}
 	
 	@GetMapping("{id}")
 	@ResponseStatus(OK)
-	public SaleOrder findById(@PathVariable Integer id) {
+	public SaleOrderItem findById(@PathVariable Integer id) {
 	
 		return service.findById(id);
 	}
@@ -44,9 +44,9 @@ public class SaleOrderController {
 
 	@PostMapping
 	@ResponseStatus(CREATED)
-	public SaleOrder saveState(@RequestBody SaleOrder SaleOrder ) {
+	public SaleOrderItem saveState(@RequestBody SaleOrderItem saleOrderItem ) {
 		
-		return repository.save(SaleOrder);
+		return repository.save(saleOrderItem);
 		
 	}
 	
