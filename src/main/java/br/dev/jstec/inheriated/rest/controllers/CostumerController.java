@@ -14,36 +14,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.dev.jstec.inheriated.domain.entities.City;
-import br.dev.jstec.inheriated.domain.repositories.CityRepository;
-import br.dev.jstec.inheriated.exceptions.ObjectNotFoundException;
+import br.dev.jstec.inheriated.domain.entities.Costumer;
+import br.dev.jstec.inheriated.domain.repositories.CostumerRepository;
+import br.dev.jstec.inheriated.services.CostumerService;
 
+@RequestMapping(path = "/api/costumers")
 @RestController
-@RequestMapping(path = "/api/cities")
-public class CityController {
+public class CostumerController {
 
 	@Autowired
-	private CityRepository repository;
+	private CostumerRepository repository;
+	
+	@Autowired
+	private CostumerService service;
 	
 	@GetMapping
 	@ResponseStatus(OK)
-	public List<City> getAllCities(){
+	public List<Costumer> getAllCostumer(){
 		return repository.findAll();
 	}
 	
 	@GetMapping("{id}")
 	@ResponseStatus(OK)
-	public City getCityById(@PathVariable Integer id){
-				
-			return repository.findById(id).orElseThrow(
-					()-> new ObjectNotFoundException("Cidade não encontrada."));
+	public Costumer findById(@PathVariable Integer id) {
+	
+		return service.findById(id);
 	}
 	
+
 	@PostMapping
 	@ResponseStatus(CREATED)
-	public City saveCity(@RequestBody City city ) {
+	public Costumer saveState(@RequestBody Costumer costumer ) {
 		
-		return repository.save(city);
+		return repository.save(costumer);
 		
 	}
+	
 }
